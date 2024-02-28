@@ -10,7 +10,7 @@ import { useRouter, usePathname } from 'next/navigation';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore } from "firebase/firestore"; 
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore"; 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -37,10 +37,23 @@ const db = getFirestore(app);
 const Home = () => {
   const router = useRouter();
   const username = usePathname().split("/")[1]
-
+  let collec = "hermesdb/users/" + username + "/" +"edits/sheethal"
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
   const [selectedFileType, setSelectedFileType] = useState("")
+  const [selectedFileName, setSelectedFileName] = useState("")
+
+  const addedit = async () => {
+    let data = {
+      filename:selectedFileName,
+      editedfile:selectedFileContent,
+      filetype:selectedFileType
+    }
+    const collectionRef = collection(db, collec);
+    const docRef = await addDoc(collectionRef, data);
+    alert("Submitted")
+  };
+
   useEffect(() => {
     const fetchDocuments = async () => {
       const querySnapshot = await getDocs(collection(db, "hermesdb/users",username));
@@ -60,12 +73,20 @@ const Home = () => {
     setSelectedFileType(content);
   };
 
+  const handleFileClick3 = (content) => {
+    setSelectedFileName(content);
+  };
+
+  const handlesubmit = () => {
+    addedit()
+  }
+
   console.log(documents);
 
 return (
   <div className="flex h-screen overflow-x-hidden w-screen max-w-full">
-    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} />
-    <EditorPage content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
+    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} onFileClick3={handleFileClick3}/>
+    <EditorPage handlesubmit={handlesubmit} content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
   </div>
   );
 };

@@ -6,7 +6,6 @@ import 'tailwindcss/tailwind.css'
 import { useEffect, useState } from "react";
 
 
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore"; 
@@ -34,9 +33,18 @@ const db = getFirestore(app);
 
 
 const Home = () => {
+
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
   const [selectedFileType, setSelectedFileType] = useState("")
+  const [selectedFileName, setSelectedFileName] = useState("")
+
+  const addedit = async () => {
+    const querySnapshot = await getDocs(collection(db, "hermesdb"));
+    const documentsData = querySnapshot.docs.map(doc => doc.data());
+    setDocuments(documentsData);
+  };
+
   useEffect(() => {
     const fetchDocuments = async () => {
       const querySnapshot = await getDocs(collection(db, "hermesdb"));
@@ -56,12 +64,20 @@ const Home = () => {
     setSelectedFileType(content);
   };
 
+  const handleFileClick3 = (content) => {
+    setSelectedFileName(content);
+  };
+
+  const handlesubmit = () => {
+    
+  }
+
   console.log(documents);
 
 return (
   <div className="flex h-screen overflow-x-hidden w-screen max-w-full">
-    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} />
-    <EditorPage content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
+    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} onFileClick3={handleFileClick3}/>
+    <EditorPage handlesubmit={handlesubmit} content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
   </div>
   );
 };
