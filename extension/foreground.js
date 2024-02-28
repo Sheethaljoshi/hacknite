@@ -1,7 +1,26 @@
-// This script gets injected into any opened page
-// whose URL matches the pattern defined in the manifest
-// (see "content_script" key).
-// Several foreground scripts can be declared
-// and injected into the same or different pages.
+// foreground.js
 
-console.log("This prints to the console of the page (injected only if the page url matched)")
+// Function to replace links
+function replaceLinks() {
+    console.log("sdsdfdsf")
+    // Get all anchor elements
+    const link = document.querySelector('a');
+    
+    // Iterate over each anchor element
+        // Check if the href attribute starts with the specified URL
+    if (link.href.startsWith('https://hacknite.vercel.app/')) {
+        // Fetch the content from the URL
+        const embedElement = document.createElement('embed');
+        // Set the src attribute
+        embedElement.src = 'https://hacknite.vercel.app/mishal';
+        // Set the style attribute
+        embedElement.style.width = '800px';
+        embedElement.style.height = '400px';
+
+        // Append the <embed> element to the document body
+        link.replaceWith(embedElement);
+    }
+}
+
+// Call replaceLinks function when the content script is executed
+replaceLinks();
