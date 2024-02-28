@@ -1,9 +1,10 @@
 // pages/index.js
 "use client";
-import Sidebar from "../components/Sidebar";
-import EditorPage from "../components/Editor";
+import Sidebar from "../../components/Sidebar";
+import EditorPage from "../../components/Editor";
 import 'tailwindcss/tailwind.css'
 import { useEffect, useState } from "react";
+import { useRouter, usePathname } from 'next/navigation';
 
 
 
@@ -34,6 +35,10 @@ const db = getFirestore(app);
 
 
 const Home = () => {
+  const router = useRouter();
+  const path = usePathname().split("/")[1]
+  console.log(path)
+
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
   const [selectedFileType, setSelectedFileType] = useState("")
