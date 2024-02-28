@@ -1,5 +1,5 @@
 // Sidebar.js
-const Sidebar = ({ files, onFileClick }) => {
+const Sidebar = ({ files, onFileClick1, onFileClick2 }) => {
   return (
     <div className="w-1/5 h-screen bg-gray-900 text-gray-100">
       <div className="p-4">File Explorer</div>
@@ -8,7 +8,7 @@ const Sidebar = ({ files, onFileClick }) => {
           <button
             key={index}
             className="block w-full px-4 py-2 text-left text-white hover:bg-gray-700"
-            onClick={() => onFileClick(file.content)}
+            onClick={() => {console.log(file);onFileClick1(file.content);onFileClick2(file.filetype)}}
           >
             {file.filename}
           </button>

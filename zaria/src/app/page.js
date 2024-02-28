@@ -1,10 +1,10 @@
 // pages/index.js
 "use client";
 import Sidebar from "../components/Sidebar";
-import Editor from "../components/Editor";
+import EditorPage from "../components/Editor";
 import 'tailwindcss/tailwind.css'
 import { useEffect, useState } from "react";
-import Prism from 'prismjs';
+
 
 
 // Import the functions you need from the SDKs you need
@@ -36,7 +36,7 @@ const db = getFirestore(app);
 const Home = () => {
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
-
+  const [selectedFileType, setSelectedFileType] = useState("")
   useEffect(() => {
     const fetchDocuments = async () => {
       const querySnapshot = await getDocs(collection(db, "hermesdb"));
@@ -48,16 +48,20 @@ const Home = () => {
 
   }, [db]);
 
-  const handleFileClick = (content) => {
+  const handleFileClick1 = (content) => {
     setSelectedFileContent(content);
+  };
+
+  const handleFileClick2 = (content) => {
+    setSelectedFileType(content);
   };
 
   console.log(documents);
 
 return (
   <div className="flex h-screen overflow-x-hidden w-screen max-w-full">
-    <Sidebar files={documents} onFileClick={handleFileClick} />
-    <Editor content={selectedFileContent} />
+    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} />
+    <EditorPage content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
   </div>
   );
 };
