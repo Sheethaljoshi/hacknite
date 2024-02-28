@@ -35,15 +35,21 @@ def uploadtofirebase(file_path):
     db.collection("hermesdb").add(data)
 
 def runcommand():
-    print("sdfsdfsdf")
     with open('runcommand.txt', 'r') as file:
         command = file.read()
         try:
             result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
             output = result.stdout
+            print("No errors detected")
+            return
         except subprocess.CalledProcessError as e:
             output = e.stderr
+            print(output)
+            name_error_index = output.find("File")
+            if name_error_index != -1:
+                output = output[name_error_index:]
         print(output)
+        
         return output
 
 def setcommand(command):
