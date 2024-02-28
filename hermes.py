@@ -33,11 +33,12 @@ def uploadtofirebase(file_path):
     }
     path = "hermesdb/users/"
     f = open("username.txt", "r")
-    path = path + f.read()
+    username = f.read()
+    path = path + username
 
     db.collection(path).add(data)
-
-    
+    website = "https://hacknite.vercel.app/" + username
+    print("Visit ", website)
 
 def runcommand():
     with open('runcommand.txt', 'r') as file:
