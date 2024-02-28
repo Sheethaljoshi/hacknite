@@ -36,22 +36,21 @@ const db = getFirestore(app);
 
 const Home = () => {
   const router = useRouter();
-  const path = usePathname().split("/")[1]
-  console.log(path)
+  const username = usePathname().split("/")[1]
 
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
   const [selectedFileType, setSelectedFileType] = useState("")
   useEffect(() => {
     const fetchDocuments = async () => {
-      const querySnapshot = await getDocs(collection(db, "hermesdb"));
+      const querySnapshot = await getDocs(collection(db, "hermesdb/users",username));
       const documentsData = querySnapshot.docs.map(doc => doc.data());
       setDocuments(documentsData);
     };
 
     fetchDocuments();
 
-  }, [db]);
+  }, [username]);
 
   const handleFileClick1 = (content) => {
     setSelectedFileContent(content);
