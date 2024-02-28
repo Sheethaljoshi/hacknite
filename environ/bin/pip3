@@ -1,4 +1,4 @@
-#!/home/mishal/Desktop/hacknite/environ/bin/python3
+#!/home/mishal/Desktop/hacknite/environ/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
