@@ -19,7 +19,7 @@ const EditorPage = ({ content, filetype, handlechange, handlesubmit,handleparse 
             Parse
           </button>
           <button id="copybutton" onClick={handlesubmit} className="px-4 py-2 bg-gray-600 text-white rounded font-semibold hover:bg-blue-600">
-            Copy Code
+            Submit and Copy
           </button>
         </div>
       </div>

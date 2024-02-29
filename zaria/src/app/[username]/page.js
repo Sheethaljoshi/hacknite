@@ -37,19 +37,23 @@ const db = getFirestore(app);
 const Home = () => {
   const router = useRouter();
   const username = usePathname().split("/")[1]
-  let collec = "hermesdb/users/" + username + "/" +"edits/sheethal"
+  let collec = "hermesdb/users/" + username +"edits/"
   const [documents, setDocuments] = useState([]);
   const [selectedFileContent, setSelectedFileContent] = useState("");
   const [selectedFileType, setSelectedFileType] = useState("")
   const [selectedFileName, setSelectedFileName] = useState("")
+  const [edits, setEdits] = useState([])
 
   const addedit = async () => {
     let data = {
       filename:selectedFileName,
-      editedfile:selectedFileContent,
-      filetype:selectedFileType
+      edited:selectedFileContent,
+      filetype:selectedFileType,
+      username:"sheethal" + " (" +selectedFileName + ")"
     }
     const collectionRef = collection(db, collec);
+    setEdits(prevArray => [...prevArray, data]);
+
     const docRef = await addDoc(collectionRef, data);
   };
 
@@ -77,7 +81,7 @@ const Home = () => {
       });
 
       const data = await response.json();
-      alert(data.detail)
+      alert(data.message)
   }
 
   useEffect(() => {
@@ -88,6 +92,17 @@ const Home = () => {
     };
 
     fetchDocuments();
+
+    const fetchedits = async () => {
+      let path = "hermesdb/users/"+username +"edits"
+      console.log(path)
+      const querySnapshot = await getDocs(collection(db, path));
+      const documentsData = querySnapshot.docs.map(doc => doc.data());
+      setEdits(documentsData);
+    };
+
+    fetchedits();
+
 
   }, [username]);
 
@@ -103,20 +118,19 @@ const Home = () => {
     setSelectedFileName(content);
   };
   const handlesubmit = () => {
-    //addedit()
+    addedit()
     copytoclipboard()
   }
 
   const handleparse = () => {
-    //addedit()
     checkerror()
   }
 
   console.log(documents);
-
+  console.log(edits)
 return (
   <div className="flex h-screen overflow-x-hidden w-screen max-w-full">
-    <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} onFileClick3={handleFileClick3}/>
+    <Sidebar edits={edits} files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} onFileClick3={handleFileClick3}/>
     <EditorPage handleparse={handleparse} handlesubmit={handlesubmit} content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
   </div>
   );
