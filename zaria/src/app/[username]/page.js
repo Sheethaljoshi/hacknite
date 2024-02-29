@@ -67,6 +67,19 @@ const Home = () => {
     alert("Copied code to clipboard and submitted");
   }
 
+  async function checkerror(){
+    const response = await fetch('https://hacknite.onrender.com/checkpythoncode/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: selectedFileContent })
+      });
+
+      const data = await response.json();
+      alert(data.detail)
+  }
+
   useEffect(() => {
     const fetchDocuments = async () => {
       const querySnapshot = await getDocs(collection(db, "hermesdb/users",username));
@@ -96,7 +109,7 @@ const Home = () => {
 
   const handleparse = () => {
     //addedit()
-    alert("Yayyyyyyyy")
+    checkerror()
   }
 
   console.log(documents);
