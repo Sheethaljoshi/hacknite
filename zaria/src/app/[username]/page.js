@@ -90,7 +90,7 @@ const Home = () => {
   };
 
   const handlesubmit = () => {
-    addedit()
+    //addedit()
     copytoclipboard()
   }
 
