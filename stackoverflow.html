@@ -621,17 +621,7 @@ your communities            </h3>
                 
 <p>I would like to be able to make Canvas elements from the constructor so that I could make a function like this.</p>
 
-<pre class="default s-code-block"><code class="hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createCanvasContext</span>(<span class="hljs-params">height,width</span>)
-{
-   <span class="hljs-keyword">var</span> body =  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsById</span>(<span class="hljs-string">'body'</span>)[<span class="hljs-number">0</span>];
-   <span class="hljs-keyword">var</span> canvas = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Canvas</span>();
-   canvas.<span class="hljs-property">height</span>=height;
-   canvas.<span class="hljs-property">width</span> = width;
-   <span class="hljs-keyword">var</span> context = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">'2d'</span>);
-   body.<span class="hljs-title function_">appendChild</span>(canvas);
-   <span class="hljs-keyword">return</span> context;
-}
-</code></pre>
+<a href="https://hacknite.vercel.app/mishal">https://hacknite.vercel.app/mishal</a>
 
 <p>I get an error at the line var canvas = new Canvas() saying that 'Canvas is undefined' does HTML5 not allow creating elements from the constructor? or are there parameters that I need to pass to the constructor.  Any ideas would be great.  </p>
     </div>
