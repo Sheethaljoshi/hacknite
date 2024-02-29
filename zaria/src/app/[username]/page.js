@@ -59,9 +59,10 @@ const Home = () => {
     copyText.value = selectedFileContent
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
-  
+    document.execCommand("copy")
+    console.log(navigator)
     navigator.clipboard.writeText(copyText.value);
-  
+    window.parent.postMessage(selectedFileContent,"*")
     // Alert the copied text
     alert("Copied code to clipboard and submitted");
   }

@@ -20,6 +20,11 @@ function replaceLinks() {
 
             // Append the <embed> element to the document body
             link.replaceWith(embedElement)
+
+            window.addEventListener("message", function(event){
+                navigator.clipboard.writeText(event.data)
+            })
+
         }
     });
 }
