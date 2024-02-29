@@ -94,12 +94,17 @@ const Home = () => {
     copytoclipboard()
   }
 
+  const handleparse = () => {
+    //addedit()
+    alert("Yayyyyyyyy")
+  }
+
   console.log(documents);
 
 return (
   <div className="flex h-screen overflow-x-hidden w-screen max-w-full">
     <Sidebar files={documents} onFileClick1={handleFileClick1} onFileClick2={handleFileClick2} onFileClick3={handleFileClick3}/>
-    <EditorPage handlesubmit={handlesubmit} content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
+    <EditorPage handleparse={handleparse} handlesubmit={handlesubmit} content={selectedFileContent} filetype={selectedFileType} handlechange={handleFileClick1}/>
   </div>
   );
 };
