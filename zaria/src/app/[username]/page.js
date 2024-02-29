@@ -88,7 +88,6 @@ const Home = () => {
   const handleFileClick3 = (content) => {
     setSelectedFileName(content);
   };
-
   const handlesubmit = () => {
     //addedit()
     copytoclipboard()
