@@ -51,8 +51,20 @@ const Home = () => {
     }
     const collectionRef = collection(db, collec);
     const docRef = await addDoc(collectionRef, data);
-    alert("Submitted")
   };
+
+  function copytoclipboard() {
+    // Get the text field
+    var copyText = document.createElement("textarea");
+    copyText.value = selectedFileContent
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+  
+    navigator.clipboard.writeText(copyText.value);
+  
+    // Alert the copied text
+    alert("Copied code to clipboard and submitted");
+  }
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -76,9 +88,9 @@ const Home = () => {
   const handleFileClick3 = (content) => {
     setSelectedFileName(content);
   };
-
   const handlesubmit = () => {
-    addedit()
+    //addedit()
+    copytoclipboard()
   }
 
   console.log(documents);
