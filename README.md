@@ -19,7 +19,7 @@ In linux,
   chmod +x hermes
   sudo pip install firebase_admin
 ```
-
+Load unpacked extension in Google Chrome via [chrome://extensions/](chrome://extensions/)
 
     
 ## Usage
